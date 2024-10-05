@@ -1,0 +1,33 @@
+async function displayMovies() {
+    const movies = await fetchMovies();
+    const movieContainer = document.getElementById('movie-list');
+
+    movies.forEach(movie => {
+        const movieElement = document.createElement('div');
+        movieElement.classList.add('movie');
+        movieElement.innerHTML = `
+            <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+            <h2>${movie.title}</h2>
+            <p>${movie.release_date}</p>
+            <button onclick="showMovieDetails(${movie.id})">Ver detalhes</button>
+        `;
+        movieContainer.appendChild(movieElement);
+    });
+}
+
+async function displayTVShows() {
+    const tvShows = await fetchTVShows();
+    const tvContainer = document.getElementById('tv-list');
+
+    tvShows.forEach(tv => {
+        const tvElement = document.createElement('div');
+        tvElement.classList.add('tv-show');
+        tvElement.innerHTML = `
+            <img src="https://image.tmdb.org/t/p/w500${tv.poster_path}" alt="${tv.name}">
+            <h2>${tv.name}</h2>
+            <p>${tv.first_air_date}</p>
+            <button onclick="showTVDetails(${tv.id})">Ver detalhes</button>
+        `;
+        tvContainer.appendChild(tvElement);
+    });
+}
